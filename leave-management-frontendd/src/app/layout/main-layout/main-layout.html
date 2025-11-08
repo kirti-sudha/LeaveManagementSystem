@@ -1,0 +1,16 @@
+<div class="main-container">
+  <app-sidebar></app-sidebar>
+
+  <div class="main-content-wrapper">
+    <!-- Optional: Add a Top Bar/Header here later -->
+    <main class="content-area">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>
+
+<!-- Profile Modal (conditionally rendered) -->
+<app-modal *ngIf="isProfileModalVisible" title="My Profile" (close)="closeProfileModal()">
+  <!-- Project the profile component into the modal's body -->
+  <app-profile></app-profile>
+</app-modal>

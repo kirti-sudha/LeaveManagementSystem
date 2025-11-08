@@ -1,0 +1,46 @@
+<div class="page-card">
+  <div class="header">
+    <h2 class="page-title">Team Leave Requests</h2>
+    <button *ngIf="!isLoading && teamLeaves.length > 0" class="btn btn-secondary" (click)="exportAsPdf()">
+      Export to PDF
+    </button>
+  </div>
+
+  <div *ngIf="successMessage" class="alert alert-success">{{ successMessage }}</div>
+  <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+  <div *ngIf="isLoading" class="loading-indicator">Loading requests...</div>
+
+  <div *ngIf="!isLoading">
+    <div *ngIf="teamLeaves.length > 0; else noRequestsTemplate" class="table-responsive">
+      <table>
+        <thead>
+          <tr>
+            <th>Employee Name</th>
+            <th>Leave Type</th>
+            <th>Dates</th>
+            <th>Reason</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let leave of teamLeaves">
+            <td>{{ leave.employeeName }}</td>
+            <td>{{ leave.leaveType }}</td>
+            <td>{{ leave.startDate | date: 'dd-MMM-yyyy' }} to {{ leave.endDate | date: 'dd-MMM-yyyy' }}</td>
+            <td>{{ leave.reason }}</td>
+            <td class="actions-cell">
+              <button class="btn btn-approve" (click)="handleAction('approve', leave.id)">Approve</button>
+              <button class="btn btn-reject" (click)="handleAction('reject', leave.id)">Reject</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <ng-template #noRequestsTemplate>
+      <div class="no-data-message">
+        <p>There are no pending leave requests from your team.</p>
+      </div>
+    </ng-template>
+  </div>
+</div>

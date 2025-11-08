@@ -1,0 +1,81 @@
+<div class="apply-leave-container">
+  <!-- The title is dynamic and changes based on whether you are creating or editing -->
+  <h2>{{ pageTitle }}</h2>
+
+  <!-- Success message display -->
+  <div *ngIf="successMessage" class="alert alert-success">{{ successMessage }}</div>
+  <!-- Error message display -->
+  <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+  <!-- Reactive form linked to the 'leaveForm' FormGroup in the component's TS file -->
+  <form [formGroup]="leaveForm" (ngSubmit)="onSubmit()">
+    <div class="form-grid">
+
+      <!-- Leave Type Dropdown -->
+      <div class="form-group">
+        <label for="leaveType">Leave Type</label>
+        <select id="leaveType" formControlName="leaveType" required>
+          <option value="" disabled>Select a type...</option>
+          <option *ngFor="let type of leaveTypes" [value]="type">{{ type | titlecase }}</option>
+        </select>
+        <!-- Validation Message -->
+        <div *ngIf="leaveForm.get('leaveType')?.invalid && leaveForm.get('leaveType')?.touched" class="validation-error">
+          Leave type is required.
+        </div>
+      </div>
+
+      <!-- Half Day Checkbox -->
+      <div class="form-group form-group-checkbox">
+        <input type="checkbox" id="isHalfDay" formControlName="isHalfDay">
+        <label for="isHalfDay">Is it a half day leave?</label>
+      </div>
+      
+
+
+<!-- Under the Start Date input -->
+<div class="form-group">
+  <label for="startDate">Start Date</label>
+  <input type="date" id="startDate" formControlName="startDate" required>
+  <!-- Show this error if the specific control's validator fails -->
+  <div *ngIf="leaveForm.get('startDate')?.errors?.['dateInPast']" class="validation-error">
+    Start date cannot be in the past.
+  </div>
+</div>
+
+
+     <!-- Under the End Date input -->
+<div class="form-group">
+  <label for="endDate">End Date</label>
+  <input type="date" id="endDate" formControlName="endDate" required>
+  <!-- Show this error if the entire form group's validator fails -->
+  <div *ngIf="leaveForm.errors?.['dateRangeInvalid'] && leaveForm.get('endDate')?.touched" class="validation-error">
+    End date cannot be before the start date.
+  </div>
+</div>
+
+      <!-- Reason Textarea -->
+      <div class="form-group full-width">
+        <label for="reason">Reason</label>
+        <textarea id="reason" rows="4" formControlName="reason" placeholder="Please provide a reason for your leave..." required></textarea>
+        <!-- Validation Message -->
+        <div *ngIf="leaveForm.get('reason')?.invalid && leaveForm.get('reason')?.touched" class="validation-error">
+          Reason is required.
+        </div>
+      </div>
+
+      <!-- Conditional File Upload Section for Sick Leave -->
+      <div class="form-group full-width" *ngIf="showFileUpload">
+        <label for="document">Upload Document (Medical Certificate)</label>
+        <input type="file" id="document" (change)="onFileSelected($event)">
+        <div *ngIf="isEditMode" class="edit-note">
+          Note: Re-uploading a file will replace the existing one.
+        </div>
+      </div>
+    </div>
+
+    <!-- Submit Button with Dynamic Text -->
+    <button type="submit" class="btn-submit" [disabled]="leaveForm.invalid">
+      {{ isEditMode ? 'Update Request' : 'Submit Request' }}
+    </button>
+  </form>
+</div>

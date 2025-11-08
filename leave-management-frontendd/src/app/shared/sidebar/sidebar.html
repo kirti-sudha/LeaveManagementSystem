@@ -1,0 +1,42 @@
+<div class="sidebar-container">
+  <div class="logo">
+    Leave Management
+  </div>
+
+  <!-- User Profile Summary Section -->
+  <div class="user-profile-summary" (click)="openProfileModal()">
+    <img src="assets/default-avatar.png" alt="User Avatar" class="avatar">
+    <div class="user-details">
+      <span class="user-name">{{ userName || 'User' }}</span>
+      <span class="user-id">{{ employeeId || 'EMP-000' }}</span>
+    </div>
+  </div>
+
+  <!-- Navigation Links -->
+  <nav class="navigation">
+    <a routerLink="/dashboard" routerLinkActive="active">
+      <!-- You can add icons here later -->
+      Dashboard
+    </a>
+    <a *ngIf="!isAdmin()" routerLink="/my-leaves" routerLinkActive="active">My Leaves</a>
+  <a *ngIf="!isAdmin()" routerLink="/apply-leave" routerLinkActive="active">Apply for Leave</a>
+    
+    <a routerLink="/reports" routerLinkActive="active">Reports</a>
+    <!-- Conditional Links -->
+    <a *ngIf="userRole === 'MANAGER'" routerLink="/team-leaves" routerLinkActive="active">Team Leaves</a>
+  
+  <!-- An HR who is NOT an Admin sees this -->
+  <a *ngIf="userRole === 'HR'" routerLink="/hr-dashboard" routerLinkActive="active">HR Dashboard</a>
+  
+  <!-- An Admin sees ONLY this link for management -->
+  <a *ngIf="isAdmin()" routerLink="/admin" routerLinkActive="active">Admin Panel</a>
+  </nav>
+
+  <!-- Logout Button at the bottom -->
+  <div class="sidebar-footer">
+    <button class="btn-logout" (click)="logout()">
+      <!-- Icon for logout -->
+      Logout
+    </button>
+  </div>
+</div>

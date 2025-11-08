@@ -1,0 +1,52 @@
+// Import the professional base styles we created for other pages
+@import '../reports/reports.scss';
+
+// Container for filter and action buttons
+.controls-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap; // Allows wrapping on smaller screens
+  gap: 1rem;
+}
+
+.filter-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+// Styling for the search input and status dropdown
+.search-input, .status-select {
+  padding: 0.6rem 1rem;
+  border: 1px solid #ced4da;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+
+  &:focus {
+    outline: none;
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  }
+}
+
+.search-input {
+  min-width: 250px;
+}
+
+.status-select {
+  min-width: 150px;
+}
+
+// Table styles - mostly inherited, but we can add specifics
+table {
+  // Ensure the table headers are aligned with the new screenshot
+  th {
+    text-transform: none;
+    font-size: 1rem;
+    letter-spacing: normal;
+    font-weight: 700;
+  }
+}

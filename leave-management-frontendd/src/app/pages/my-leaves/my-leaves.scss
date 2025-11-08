@@ -1,0 +1,164 @@
+// Base styles for the page container and cards
+.page-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem; // Space between the cards
+}
+
+.card {
+  background: #ffffff;
+  padding: 1.5rem 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+// Header styles for titles and action buttons
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #eef2f5;
+
+  h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #333;
+  }
+}
+
+// Button styles
+.btn {
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.2s ease-in-out;
+
+  &.btn-primary {
+    background-color: #007bff;
+    color: white;
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
+  &.btn-edit {
+    background-color: #f0f0f0;
+    color: #333;
+    border: 1px solid #ddd;
+    &:hover {
+      background-color: #e0e0e0;
+    }
+  }
+  &.btn-cancel {
+    background-color: #dc3545;
+    color: white;
+    &:hover {
+      background-color: #c82333;
+    }
+  }
+}
+
+// Styles for the Leave Balance cards
+.balance-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1.5rem;
+}
+
+.balance-card {
+  background: #f8f9fa;
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+  border: 1px solid #eef2f5;
+
+  h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #555;
+  }
+  .days {
+    .remaining {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #007bff;
+    }
+    .total {
+      color: #6c757d;
+      font-size: 1rem;
+    }
+  }
+}
+
+// Styles for the main table
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+
+  th, td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #eef2f5;
+    vertical-align: middle;
+  }
+
+  th {
+    font-weight: 600;
+    color: #6c757d;
+    background-color: #f8f9fa;
+  }
+
+  tr:last-child td {
+    border-bottom: none;
+  }
+}
+
+.actions-cell {
+  display: flex;
+  gap: 0.75rem;
+}
+
+// Status badge styles
+.status-badge {
+  padding: 0.3rem 0.8rem;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #fff;
+  text-transform: capitalize;
+
+  &.status-pending { background-color: #ffc107; color: #212529; }
+  &.status-approved { background-color: #28a745; }
+  &.status-rejected { background-color: #dc3545; }
+  &.status-cancelled { background-color: #6c757d; }
+}
+
+// Placeholder messages
+.loading-indicator,
+.no-data-message {
+  text-align: center;
+  padding: 2rem;
+  color: #6c757d;
+}
+
+// Alert messages
+.alert {
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  &.alert-success { background-color: #d4edda; color: #155724; border-color: #c3e6cb; }
+  &.alert-danger { background-color: #f8d7da; color: #721c24; border-color: #f5c6cb; }
+}

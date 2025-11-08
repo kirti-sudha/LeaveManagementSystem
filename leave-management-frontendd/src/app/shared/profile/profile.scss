@@ -1,0 +1,96 @@
+// You can find a complete stylesheet example here:
+// https://gist.github.com/a-vis/16327e5322ca38e0b601f782c5f10255
+// For brevity, here's a simplified version:
+
+.profile-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    padding: 24px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 16px;
+    margin-bottom: 16px;
+
+    h3 {
+        margin: 0;
+        color: #333;
+    }
+}
+
+.profile-view .profile-picture {
+    text-align: center;
+    margin-bottom: 1rem;
+    img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid #eee;
+    }
+}
+
+.profile-view h4, .profile-view .designation {
+    text-align: center;
+    margin: 0.25rem 0;
+}
+
+.profile-view .designation {
+    color: #777;
+}
+
+.profile-details p {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #f9f9f9;
+    strong { color: #555; }
+    span { color: #333; }
+}
+
+.profile-edit .form-group {
+    margin-bottom: 1rem;
+    label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+    input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+}
+
+.form-group-static {
+    padding: 10px;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+
+.btn-edit, .btn-save {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.btn-edit { background-color: #e0e0e0; }
+.btn-save { background-color: #007bff; color: white; }
+
+.alert {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+}
+.alert-success { background-color: #d4edda; color: #155724; }
+.alert-danger { background-color: #f8d7da; color: #721c24; }

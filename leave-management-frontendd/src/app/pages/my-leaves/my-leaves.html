@@ -1,0 +1,79 @@
+<div class="page-container">
+  <!-- Section 1: Leave Balances -->
+  <div class="card">
+    <div class="header">
+      <h2>My Leave Balances</h2>
+      <button class="btn btn-primary" routerLink="/apply-leave">+ Apply for Leave</button>
+    </div>
+
+    <!-- This div will now correctly show the loading state -->
+    <div *ngIf="isLoading" class="loading-indicator">Loading balances...</div>
+
+    <!-- Show balances ONLY if not loading AND there are balances -->
+    <div *ngIf="!isLoading && leaveBalances.length > 0" class="balance-grid">
+      <div *ngFor="let balance of leaveBalances" class="balance-card">
+        <h3>{{ balance.leaveType | titlecase }}</h3>
+        <div class="days">
+          <span class="remaining">{{ balance.remainingDays }}</span>
+          <span class="total">/ {{ balance.totalDays }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Show "not configured" message ONLY if not loading AND there are NO balances -->
+    <div *ngIf="!isLoading && leaveBalances.length === 0" class="no-data-message">
+      <p>Leave balances are not configured yet.</p>
+    </div>
+  </div>
+
+  <!-- Section 2: Leave Requests History -->
+  <div class="card">
+    <div class="header">
+      <h2>My Leave Requests</h2>
+    </div>
+    
+    <div *ngIf="isLoading" class="loading-indicator">Loading requests...</div>
+    <div *ngIf="successMessage" class="alert alert-success">{{ successMessage }}</div>
+    <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+    <div *ngIf="!isLoading">
+      <div *ngIf="myLeaves.length > 0; else noLeavesTemplate" class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>Leave Type</th>
+              <th>Dates</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let leave of myLeaves">
+              <td>{{ leave.leaveType | titlecase }}</td>
+              <td>{{ leave.startDate | date: 'MMM d, y' }} to {{ leave.endDate | date: 'MMM d, y' }}</td>
+              <td>
+                <span class="status-badge" [ngClass]="'status-' + leave.status.toLowerCase()">
+                  {{ leave.status | titlecase }}
+                </span>
+              </td>
+              <td class="actions-cell">
+                <ng-container *ngIf="leave.status === 'PENDING'; else noActions">
+                  <button class="btn btn-edit" [routerLink]="['/apply-leave/edit', leave.id]">Edit</button>
+                  <button class="btn btn-cancel" (click)="onCancelLeave(leave.id)">Cancel</button>
+                </ng-container>
+                <ng-template #noActions>
+                  <span>--</span>
+                </ng-template>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <ng-template #noLeavesTemplate>
+        <div class="no-data-message">
+          <p>You have not applied for any leaves yet.</p>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>

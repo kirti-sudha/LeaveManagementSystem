@@ -1,0 +1,131 @@
+<div class="admin-panel-container">
+  <h2 class="page-title">Admin Panel</h2>
+
+  <!-- Tab Navigation -->
+  <ul class="nav-tabs">
+    <li [class.active]="activeTab === 'users'" (click)="selectTab('users')">User Management</li>
+    <li [class.active]="activeTab === 'holidays'" (click)="selectTab('holidays')">Holiday Management</li>
+  </ul>
+
+  <!-- Alerts will be shown at the top of the tab content -->
+  <div *ngIf="successMessage" class="alert alert-success">{{ successMessage }}</div>
+  <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+
+  <!-- Tab Content -->
+  <div class="tab-content">
+    <!-- User Management Tab -->
+    <div *ngIf="activeTab === 'users'">
+      <div class="tab-header">
+        <h3>All Users</h3>
+        <button class="btn btn-primary" (click)="openForm(null)">+ Add User</button>
+      </div>
+      
+      <!-- Dynamic Form for Create/Edit -->
+      <div *ngIf="showUserForm" class="form-container slide-down">
+        <h4>{{ isEditMode ? 'Edit User: ' + userToEdit?.name : 'Create New User' }}</h4>
+        <form [formGroup]="userForm" (ngSubmit)="onUserSubmit()">
+          <input formControlName="name" placeholder="Full Name">
+          <input formControlName="employeeId" placeholder="Employee ID">
+          <input formControlName="officialEmail" placeholder="Official Email" type="email">
+          <input formControlName="password" placeholder="New Password" type="password">
+          <div *ngIf="isEditMode" class="form-note">Leave password blank to keep it unchanged.</div>
+          
+          <select formControlName="role">
+            <option value="EMPLOYEE">Employee</option>
+            <option value="MANAGER">Manager</option>
+            <option value="HR">HR</option>
+            <option value="ADMIN">Admin</option>
+          </select>
+          <input formControlName="department" placeholder="Department">
+          <input formControlName="designation" placeholder="Designation">
+          <input formControlName="dateOfJoining" type="date">
+          
+          <select formControlName="reportingManagerId">
+            <option [ngValue]="null">No Reporting Manager</option>
+            <option *ngFor="let user of users" [ngValue]="user.id" 
+                    [disabled]="user.role === 'EMPLOYEE' || (isEditMode && user.id === userToEdit?.id)">
+              {{ user.name }} ({{ user.role }})
+            </option>
+          </select>
+          
+          <div class="form-actions full-width">
+            <button type="submit" [disabled]="userForm.invalid" class="btn btn-primary">
+              {{ isEditMode ? 'Update User' : 'Create User' }}
+            </button>
+            <button type="button" class="btn btn-secondary" (click)="closeForm()">Cancel</button>
+          </div>
+        </form>
+      </div>
+      
+      <!-- Users Table -->
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th><th>Employee ID</th><th>Email</th><th>Role</th><th>Manager</th><th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of users">
+              <td>{{ user.name }}</td>
+              <td>{{ user.employeeId }}</td>
+              <td>{{ user.officialEmail }}</td>
+              <td><span class="role-badge role-{{user.role | lowercase}}">{{ user.role }}</span></td>
+              <td>{{ user.reportingManagerName || 'N/A' }}</td>
+              <td class="actions-cell">
+                <button class="btn btn-secondary" (click)="openForm(user)">Edit</button>
+                <button class="btn btn-danger" (click)="onDeleteUser(user.id, user.name)" 
+                        [disabled]="user.id === currentUserId"
+                        [title]="user.id === currentUserId ? 'You cannot remove yourself.' : 'Remove User'">
+                  Remove
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+        <!-- Holiday Management Tab -->
+    <div *ngIf="activeTab === 'holidays'">
+      <div class="holiday-grid">
+        <!-- Add Holiday Form -->
+        <div class="form-container">
+          <h4>Add New Holiday</h4>
+          <form [formGroup]="holidayForm" (ngSubmit)="onHolidaySubmit()">
+            <div class="form-group">
+              <label for="holidayName">Holiday Name</label>
+              <input id="holidayName" formControlName="name" placeholder="e.g., New Year's Day">
+            </div>
+            <div class="form-group">
+              <label for="holidayDate">Date</label>
+              <input id="holidayDate" formControlName="date" type="date">
+            </div>
+            <button type="submit" [disabled]="holidayForm.invalid" class="btn btn-primary">Add Holiday</button>
+          </form>
+        </div>
+
+        <!-- Holiday List -->
+        <div class="holiday-list-container">
+          <h4>Configured Holidays</h4>
+          <div *ngIf="holidays.length > 0; else noHolidays">
+            <ul class="holiday-list">
+              <li *ngFor="let holiday of holidays">
+                <div class="holiday-info">
+                  <span class="holiday-name">{{ holiday.name }}</span>
+                  <span class="holiday-date">{{ holiday.date | date: 'longDate' }}</span>
+                </div>
+                <button class="btn btn-danger-outline" (click)="onDeleteHoliday(holiday.id, holiday.name)" title="Delete Holiday">
+                  &times;
+                </button>
+              </li>
+            </ul>
+          </div>
+          <ng-template #noHolidays>
+            <p class="no-data-message">No holidays have been configured yet.</p>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>  

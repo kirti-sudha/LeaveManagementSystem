@@ -1,0 +1,167 @@
+// Base styles
+.admin-panel-container {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.page-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0 0 1.5rem 0;
+}
+
+// Tab styles
+.nav-tabs {
+  list-style-type: none;
+  padding: 0;
+  margin-bottom: 2rem;
+  display: flex;
+  gap: 1.5rem;
+  border-bottom: 2px solid #eef2f5;
+  li {
+    padding: 10px 5px;
+    cursor: pointer;
+    font-weight: 500;
+    color: #6c757d;
+    position: relative;
+    border-bottom: 3px solid transparent;
+    transition: color 0.2s;
+    &:hover { color: #007bff; }
+    &.active {
+      color: #007bff;
+      font-weight: 600;
+      border-bottom-color: #007bff;
+    }
+  }
+}
+
+// Header within a tab
+.tab-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  h3 { font-size: 1.5rem; margin: 0; }
+}
+
+// Form container
+.form-container {
+  padding: 1.5rem; background-color: #f8f9fa;
+  border: 1px solid #eef2f5; border-radius: 8px;
+  margin-bottom: 2rem;
+  h4 { margin: 0 0 1rem 0; }
+  form {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+  }
+  input, select { padding: 10px; border: 1px solid #ccc; border-radius: 6px; }
+  .full-width { grid-column: 1 / -1; }
+}
+
+// Table styles (reusing from my-leaves)
+@import '../my-leaves/my-leaves.scss';
+
+.actions-cell {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.role-badge {
+    padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.8rem;
+    &.role-admin { background-color: #6f42c1; color: white; }
+    &.role-manager { background-color: #007bff; color: white; }
+    &.role-hr { background-color: #fd7e14; color: white; }
+    &.role-employee { background-color: #20c997; color: white; }
+}
+
+// Animation for form
+.slide-down {
+  animation: slide-down 0.3s ease-out;
+}
+@keyframes slide-down {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.btn {
+  // ... existing styles ...
+  &:disabled {
+    background-color: #e9ecef;
+    color: #6c757d;
+    cursor: not-allowed;
+    border-color: #ced4da;
+  }
+}
+
+.holiday-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr; // Form takes 1 part, list takes 2 parts
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.form-container .form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+  label {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+}
+
+.holiday-list-container h4 {
+  margin: 0 0 1rem 0;
+}
+
+.holiday-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border: 1px solid #eef2f5;
+    border-radius: 8px;
+    margin-bottom: 0.75rem;
+    background-color: #f8f9fa;
+  }
+}
+
+.holiday-info {
+  display: flex;
+  flex-direction: column;
+  .holiday-name {
+    font-weight: 600;
+  }
+  .holiday-date {
+    font-size: 0.9rem;
+    color: #6c757d;
+  }
+}
+
+.btn.btn-danger-outline {
+  background: transparent;
+  color: #dc3545;
+  border: 1px solid #dc3545;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  font-size: 1.2rem;
+  line-height: 1;
+  &:hover {
+    background: #dc3545;
+    color: white;
+  }
+}
+
+.no-data-message {
+    text-align: center;
+    padding: 2rem;
+    color: #6c757d;
+}

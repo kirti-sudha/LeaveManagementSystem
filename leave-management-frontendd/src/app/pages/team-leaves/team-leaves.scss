@@ -1,0 +1,25 @@
+// Import the new, improved styles from the reports page
+@import '../reports/reports.scss';
+
+// Specific button styles for this component
+.btn {
+  &.btn-approve {
+    background-color: #28a745;
+    color: white;
+    &:hover {
+      background-color: #218838;
+    }
+  }
+  &.btn-reject {
+    background-color: #dc3545;
+    color: white;
+    &:hover {
+      background-color: #c82333;
+    }
+  }
+}
+
+.actions-cell {
+  display: flex;
+  gap: 0.75rem;
+}

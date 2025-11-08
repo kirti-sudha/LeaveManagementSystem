@@ -1,0 +1,17 @@
+<div class="dashboard-container">
+  <h2>My Leave Dashboard</h2>
+  <p>Here is a summary of your available leaves for the year.</p>
+
+  <div *ngIf="isLoading">Loading balances...</div>
+
+  <div *ngIf="!isLoading" class="balance-grid">
+    <div *ngFor="let balance of leaveBalances" class="balance-card">
+      <h3>{{ balance.leaveType | titlecase }}</h3>
+      <div class="days">
+        <span class="remaining">{{ balance.remainingDays }}</span>
+        <span class="total">/ {{ balance.totalDays }} days</span>
+      </div>
+      <p>Remaining</p>
+    </div>
+  </div>
+</div>

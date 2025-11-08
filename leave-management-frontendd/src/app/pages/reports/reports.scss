@@ -1,0 +1,53 @@
+// Import shared styles for consistency
+@import '../my-leaves/my-leaves.scss';
+
+.page-card {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.page-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 0;
+  color: #333;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #eef2f5;
+}
+
+.btn.btn-secondary {
+  background-color: #f0f0f0;
+  color: #333;
+  border: 1px solid #ddd;
+  font-weight: 500;
+  &:hover {
+    background-color: #e0e0e0;
+  }
+}
+
+table {
+  th, td {
+    font-weight: 500; // Makes table text less bold and cleaner
+  }
+
+  th {
+    font-weight: 600;
+    text-transform: uppercase; // Gives a more professional header look
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+  }
+}
+
+// Making status badges consistent
+.status-badge {
+  text-transform: capitalize;
+}
